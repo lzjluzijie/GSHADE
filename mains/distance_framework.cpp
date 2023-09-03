@@ -324,13 +324,15 @@ int main(int argc, char** argv)
 		InitOTReceiver(addr, port);
 	}
 
-	testRoutine();
+	// testRoutine();
+
+	int bitlen, K, dbsize;
 
 	/* Benchmark Eigenface computation*/
 	int Kdash = 10304;
-	int bitlen = 8;
-	int K = 12;
-	int dbsize = 1000;
+	bitlen = 8;
+	K = 12;
+	dbsize = 320;
 	gettimeofday(&tempStart, NULL);
 	for(int i = 0; i < runs; i++)
 		testEigenfaces(Kdash, bitlen, K, dbsize);
@@ -339,30 +341,30 @@ int main(int argc, char** argv)
 			dbsize << "-element database: " << getMillies(tempStart, tempEnd)/runs << "s" << endl;
 	/* End of Eigenface computation*/
 
-	/* Benchmark Eigenface computation*/
-	bitlen = 8;
-	K = 12;
-	dbsize = 1000;
-	gettimeofday(&tempStart, NULL);
-	for(int i = 0; i < runs; i++)
-		testEuclideanDistance(K, bitlen, dbsize);
-	gettimeofday(&tempEnd, NULL);
-	cout << "Required time for computing the " << K << "-dimensional 1-vs-" << dbsize << " Euclidean Distance with " << bitlen
-			<< "-bit coordinates: " << getMillies(tempStart, tempEnd)/runs << "s" << endl;
-	/* End of Eigenface computation*/
+	// /* Benchmark FingerCodes */
+	// bitlen = 8;
+	// K = 640;
+	// dbsize = 128;
+	// gettimeofday(&tempStart, NULL);
+	// for(int i = 0; i < runs; i++)
+	// 	testEuclideanDistance(K, bitlen, dbsize);
+	// gettimeofday(&tempEnd, NULL);
+	// cout << "Required time for computing the " << K << "-dimensional 1-vs-" << dbsize << " Euclidean Distance with " << bitlen
+	// 		<< "-bit coordinates: " << getMillies(tempStart, tempEnd)/runs << "s" << endl;
+	// /* End of FingerCodes */
 
 
-	/* Benchmark Hamming distance computation*/
-	dbsize = 50000;
-	int idxlen = 900;
-	gettimeofday(&tempStart, NULL);
-	for(int i = 0; i < runs; i++)
-		testHammingDistance(idxlen, dbsize);
-	gettimeofday(&tempEnd, NULL);
+	// /* Benchmark SCiFi */
+	// dbsize = 100;
+	// int idxlen = 900;
+	// gettimeofday(&tempStart, NULL);
+	// for(int i = 0; i < runs; i++)
+	// 	testHammingDistance(idxlen, dbsize);
+	// gettimeofday(&tempEnd, NULL);
 
-	cout << "Required time for computing the 1-vs-" << dbsize << " Hamming distance on " << idxlen << "-bit elements: "
-			<< getMillies(tempStart, tempEnd)/runs << "s" << endl;
-	/* End of Hamming distance computation*/
+	// cout << "Required time for computing the 1-vs-" << dbsize << " Hamming distance on " << idxlen << "-bit elements: "
+	// 		<< getMillies(tempStart, tempEnd)/runs << "s" << endl;
+	// /* End of SCiFi */
 
 	Cleanup();
 
